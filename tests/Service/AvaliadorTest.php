@@ -56,4 +56,48 @@ class AvaliadorTest extends TestCase
 
     self::assertEquals(2500, $maiorValor);
   }
+
+  public function test_avaliador_deve_encontrar_menor_valor_em_ordem_crescente()
+  {
+    // arrange - given
+    // arruma a casa para o teste
+    $leilao = new Leilao('Fiat 147');
+
+    $maria = new Usuario('Maria');
+    $joao = new Usuario('João');
+
+    $leilao->recebeLance(new Lance($joao, 2000));
+    $leilao->recebeLance(new Lance($maria, 2500));
+
+    // act - when
+    // executa o teste a ser testada
+    $leiloeiro = new Avaliador();
+    $leiloeiro->avalia($leilao);
+
+    $menorValor = $leiloeiro->getMenorValor();
+
+    self::assertEquals(2000, $menorValor);
+  }
+
+  public function test_avaliador_deve_encontrar_menor_valor_em_ordem_decrescente()
+  {
+    // arrange - given
+    // arruma a casa para o teste
+    $leilao = new Leilao('Fiat 147');
+
+    $maria = new Usuario('Maria');
+    $joao = new Usuario('João');
+
+    $leilao->recebeLance(new Lance($maria, 2500));
+    $leilao->recebeLance(new Lance($joao, 2000));
+
+    // act - when
+    // executa o teste a ser testada
+    $leiloeiro = new Avaliador();
+    $leiloeiro->avalia($leilao);
+
+    $menorValor = $leiloeiro->getMenorValor();
+
+    self::assertEquals(2000, $menorValor);
+  }
 }
