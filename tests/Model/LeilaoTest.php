@@ -9,14 +9,16 @@ use PHPUnit\Framework\TestCase;
 
 class LeilaoTest extends TestCase
 {
+
   /**
+   * @test
    * @dataProvider geraLances
    * @param integer $qtdLances
    * @param Leilao $leilao
    * @param array $valores
    * @return void
    */
-  public function testLeilaoDeveReceberLances(
+  public function leilaoDeveReceberLances(
     int $qtdLances,
     Leilao $leilao,
     array $valores
@@ -28,7 +30,11 @@ class LeilaoTest extends TestCase
     }
   }
 
-  public function testLeilaoNaoDeveReceberLancesRepetidos()
+  /**
+   * @test
+   * @return void
+   */
+  public function LeilaoNaoDeveReceberLancesRepetidos()
   {
     $leilao = new Leilao('Variante');
     $ana = new Usuario('Ana');
