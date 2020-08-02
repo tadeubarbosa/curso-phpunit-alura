@@ -9,7 +9,6 @@ use Alura\Leilao\Service\Avaliador;
 
 use PHPUnit\Framework\TestCase;
 
-
 class AvaliadorTest extends TestCase
 {
   private $avaliador;
