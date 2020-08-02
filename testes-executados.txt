@@ -1,6 +1,7 @@
 Leilao (Alura\Leilao\Tests\Model\Leilao)
  [x] Leilao deve receber lances with data set "2-lances"
  [x] Leilao deve receber lances with data set "1-lance"
+ [x] Leilao nao deve receber lances repetidos
 
 Avaliador (Alura\Leilao\Service\Avaliador)
  [x] Avaliador deve encontrar maior valor with data set "ordem-crescente"
