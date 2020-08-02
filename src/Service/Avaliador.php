@@ -12,7 +12,7 @@ class Avaliador
   {
     foreach ($leilao->getLances() as $lance) {
       if ($lance->getValor() > $this->maiorValor) {
-        $this->maiorValor = $lance;
+        $this->maiorValor = $lance->getValor();
       }
     }
   }
