@@ -10,11 +10,13 @@ class Leilao
     private $lances;
     /** @var string */
     private $descricao;
+    private $finalizado;
 
     public function __construct(string $descricao)
     {
         $this->descricao = $descricao;
         $this->lances = [];
+        $this->finalizado = false;
     }
 
     public function recebeLance(Lance $lance)
@@ -32,6 +34,24 @@ class Leilao
         $this->lances[] = $lance;
     }
 
+    /**
+     * @return Lance[]
+     */
+    public function getLances(): array
+    {
+        return $this->lances;
+    }
+
+    public function estaFinalizado(Leilao $leilao): bool
+    {
+      return $leilao->finalizado;
+    }
+
+    public function finaliza()
+    {
+        $this->finalizado = true;
+    }
+
     protected function qtdDeLancesPorUsuario(Usuario $usuario)
     {
       return array_reduce(
@@ -46,16 +66,9 @@ class Leilao
       );
     }
 
-    protected function ehDoUltimoUsuario(Lance $lance) {
+    protected function ehDoUltimoUsuario(Lance $lance)
+    {
       $lastLance = count($this->lances) - 1;
       return $lance->getUsuario() == $this->lances[$lastLance]->getUsuario();
-    }
-
-    /**
-     * @return Lance[]
-     */
-    public function getLances(): array
-    {
-        return $this->lances;
     }
 }

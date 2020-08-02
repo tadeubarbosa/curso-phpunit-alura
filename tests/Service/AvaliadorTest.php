@@ -6,7 +6,7 @@ use Alura\Leilao\Model\Lance;
 use Alura\Leilao\Model\Leilao;
 use Alura\Leilao\Model\Usuario;
 use Alura\Leilao\Service\Avaliador;
-
+use DomainException;
 use PHPUnit\Framework\TestCase;
 
 class AvaliadorTest extends TestCase
@@ -76,6 +76,19 @@ class AvaliadorTest extends TestCase
     $this->expectExceptionMessage("Não é possível avaliar um leilão vazio!");
 
     $leilao = new Leilao('Fusca Azul');
+    $this->avaliador->avalia($leilao);
+  }
+
+  public function test_leilao_finalizado_nao_pode_ser_avaliado()
+  {
+    $this->expectException(DomainException::class);
+    $this->expectExceptionMessage("Leilão já está finalizado!");
+
+    $leilao = new Leilao('Fiat 147');
+    $leilao->recebeLance(new Lance(new Usuario('Ana'), 2000));
+
+    $leilao->finaliza();
+
     $this->avaliador->avalia($leilao);
   }
 
